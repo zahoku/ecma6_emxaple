@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="public/index.css">
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/transit.js"></script>
+    <title>Elevator Action</title>
+</head>
+<body>
+<div id="root">
+    <section id="building">
+        <div id="floorContainer"></div>
+
+        <div class="elevatorPositionContainer">
+            <div id="elevatorContainer"></div>
+        </div>
+    </section>
+
+    <section id="uiArea">
+        <filedset class="buildingInfo pure-form">
+            <div class="inner">
+                <label for="totalFloor">층</label><input type="number" id="totalFloor">
+                <label for="totalElevator">엘레베이터</label><input type="number" id="totalElevator">
+                <button id="createBuildingBtn" class="pure-button pure-button-primary">빌딩 생성</button>
+            </div>
+        </filedset>
+
+        <filedset class="apiInput pure-form pure-form-stacked">
+            <div class="inner">
+                <label for="checkActivatableFloor">층 활성화 여부 확인</label><input type="number" id="checkActivatableFloor">
+                <button id="checkActivatableFloorBtn" class="pure-button pure-button-primary">층 활성화 확인</button>
+                <label for="activatingFloor">층 활성화</label><input type="number" id="activatingFloor">
+                <button id="activatingFloorBtn" class="pure-button pure-button-primary">층 활성화</button>
+            </div>
+        </filedset>
+        <div class="apiReference">
+
+        </div>
+    </section>
+
+    <section id="apiDoc">
+        <h1>Global Function API</h1>
+        <ul>
+            <li>
+                <h2>isActivatableFloor(floorNum)</h2>
+                <dl>
+                    <dt>Description</dt>
+                    <dd>
+                        층의 활성화 가능 여부를 확인하는 함수
+                    </dd>
+                    <dt>Arguments</dt>
+                    <dd>
+                        floorNum (Number): 몇층인지를 나타는 숫자값
+                    </dd>
+                    <dt>Returns</dt>
+                    <dd>
+                        (Boolean): 활성화가 가능하면 true 아니면 false(비활성화 된 floor는 true를 리턴함)
+                    </dd>
+                    <dt>Example</dt>
+                    <dd>
+                        <code>
+                            let floorNum = 1;
+                            let result = isActivatableFloor(floorNum);
+                            if (result) {
+                            ...
+                            } else {
+                            ...
+                            }
+                        </code>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <h2>activatingFloor(floorNum)</h2>
+                <dl>
+                    <dt>Description</dt>
+                    <dd>
+                        층에서 엘레베이터를 호출하면 층은 비활성화가 되어 버튼이 클릭되지 않는다.
+                        해당함수를 사용하면 비활성화가 풀리며 호출된 엘레베이터의 target floor는 undefined가된다.
+                    </dd>
+                    <dt>Arguments</dt>
+                    <dd>
+                        floorNum (Number): 몇층인지를 나타는 숫자값
+                    </dd>
+                    <dt>Returns</dt>
+                    <dd>
+                        (Object)
+                        <ul>
+                            <li>floorId: 활성화된 층의 아이디</li>
+                            <li>elevatorId: 층에서 호출되어진 엘레베이터의 아이디</li>
+                        </ul>
+                    </dd>
+                    <dt>Example</dt>
+                    <dd>
+                        <code>
+                            let floorNum = 1;
+                            let result = isActivatableFloor(floorNum);
+                            let floorId = result.floorId;
+                            let elevatorId = result.elevatorId;
+                            ...
+                        </code>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </section>
+
+</div>
+<script src="bundle.js"></script>
+</body>
+</html>
